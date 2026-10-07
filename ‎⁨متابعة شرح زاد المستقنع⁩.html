@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>متابعة شرح زاد المستقنع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f1f5f9;--card:#fff;--ink:#0f172a;--mute:#64748b;--line:#e2e8f0;--chip:#f1f5f9;
+--t1:#0f766e;--t1b:#14b8a6;--t2:#d04f54;--t2b:#ee6b6e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#131c2e;--ink:#f1f5f9;--mute:#94a3b8;--line:#243049;--chip:#1c2740;--t1:#0d9488;--t2:#c9474c}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#131c2e;--ink:#f1f5f9;--mute:#94a3b8;--line:#243049;--chip:#1c2740;--t1:#0d9488;--t2:#c9474c}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Amiri","FreeSerif",serif;font-size:18px;line-height:1.5}
+header{background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;text-align:center;padding:28px 16px 22px}
+h1{margin:0;font-size:clamp(28px,6vw,46px)}
+.sub{color:#fcd34d;font-size:clamp(17px,3.4vw,22px);margin-top:6px}
+.top{display:inline-block;margin-top:14px;background:#e5484d;color:#fff;text-decoration:none;font-weight:700;font-size:clamp(18px,3.6vw,22px);padding:8px 22px;border-radius:30px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.top:active{background:#c93a3f}
+.sum{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px}
+.bar{height:14px;background:var(--chip);border-radius:9px;overflow:hidden;max-width:900px;margin:6px auto 0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--t1b),var(--t2b));transition:width .3s}
+.stats{display:flex;justify-content:space-between;max-width:900px;margin:0 auto;font-weight:700;font-size:19px;gap:8px;flex-wrap:wrap}
+.stats span small{color:var(--mute);font-weight:400}
+main{max-width:1100px;margin:0 auto;padding:14px 12px 40px}
+.term{color:#fff;text-align:center;border-radius:14px;padding:8px;margin:18px 0 12px;font-size:clamp(20px,4vw,26px);font-weight:700}
+.term small{font-weight:400;opacity:.9;font-size:.75em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 8px 12px;text-align:center;border-top:5px solid var(--c)}
+.card.done{background:color-mix(in srgb,var(--c) 14%,var(--card))}
+.wk{display:block;width:100%;background:var(--c2);color:#fff;border:0;border-radius:22px;padding:4px 6px;font:inherit;font-weight:700;font-size:18px;cursor:pointer}
+.dt{color:var(--mute);font-size:15px;margin-top:6px}
+.card.now{outline:3px solid var(--c);outline-offset:1px}
+.nowtag{display:block;color:var(--c2);font-size:14px;font-weight:700}
+.cnt{color:var(--mute);font-size:15px;margin:6px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chip{min-width:44px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--chip);color:var(--ink);font:inherit;font-weight:700;font-size:17px;cursor:pointer;padding:0 6px}
+.chip.on{background:var(--c);border-color:var(--c);color:#fff}
+.chip.on::after{content:" ✓";font-size:13px}
+.foot{text-align:center;color:var(--mute);font-size:15px;margin-top:24px}
+.foot button{font:inherit;background:none;border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:6px 14px;cursor:pointer;margin-top:8px}
+</style>
+</head>
+<body>
+<header><h1>متابعة شرح زاد المستقنع</h1><div class="sub">الشيخ أحمد القعيمي - معهد البهوتي</div><div class="sub" style="color:#cbd5e1;font-size:clamp(15px,3vw,19px)">من 10 أكتوبر 2026 إلى 18 يونيو 2027</div><a class="top" id="ytBtn" target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLIHsFGtup5z9j6FtmaEUW_W1KCfP_LLkZ">&#9654; افتح قائمة التشغيل على يوتيوب</a></header>
+<div class="sum"><div class="stats"><span id="s1"></span><span id="s2"></span><span id="s3"></span></div><div class="bar"><i id="pb"></i></div></div>
+<main id="app"></main>
+<script>
+(function(){
+var T=157,W=36,KEY="zad36-progress";
+var done=new Set();
+var weeks=[],cur=1;for(var i=0;i<W;i++){var n=i<13?5:4;weeks.push([cur,cur+n-1]);cur+=n;}
+var terms=[{n:"الترم الأول",r:"الأسابيع 1 - 18",c:"var(--t1b)",c2:"var(--t1)"},{n:"الترم الثاني",r:"الأسابيع 19 - 36",c:"var(--t2b)",c2:"var(--t2)"}];
+var MN=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+var START=Date.UTC(2026,9,10),DAY=864e5;
+function dr(wi){var s=new Date(START+wi*7*DAY),e=new Date(START+(wi*7+6)*DAY);
+  var a=s.getUTCDate(),b=e.getUTCDate();
+  return s.getUTCMonth()===e.getUTCMonth()?a+" - "+b+" "+MN[e.getUTCMonth()]:a+" "+MN[s.getUTCMonth()]+" - "+b+" "+MN[e.getUTCMonth()];}
+var nt=new Date(),TODAY=Date.UTC(nt.getFullYear(),nt.getMonth(),nt.getDate());
+function isNow(wi){var s=START+wi*7*DAY;return TODAY>=s&&TODAY<s+7*DAY;}
+var docRef=null,timer=null;
+
+function loadLocal(){try{var v=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.isArray(v))v.forEach(function(x){done.add(x)});}catch(e){}}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(Array.from(done)));}catch(e){}}
+function save(){saveLocal();if(!docRef)return;clearTimeout(timer);timer=setTimeout(function(){try{docRef.set({done:Array.from(done)}).catch(function(){});}catch(e){}},600);}
+
+function num(a,b){var c=0;for(var v=a;v<=b;v++)if(done.has(v))c++;return c;}
+function render(){
+  var h="";
+  terms.forEach(function(t,ti){
+    h+='<div class="term" style="background:'+t.c2+'">'+t.n+' <small>('+t.r+')</small></div><div class="grid">';
+    for(var k=0;k<18;k++){
+      var wi=ti*18+k,a=weeks[wi][0],b=weeks[wi][1],n=b-a+1,d=num(a,b);
+      h+='<div class="card'+(d===n?' done':'')+(isNow(wi)?' now':'')+'" style="--c:'+t.c+';--c2:'+t.c2+'"><button class="wk" data-w="'+wi+'">الأسبوع '+(wi+1)+(d===n?' ✓':'')+'</button><div class="dt">'+dr(wi)+'</div>'+(isNow(wi)?'<span class="nowtag">أسبوعك الحالي</span>':'')+'<div class="cnt">'+d+' / '+n+' مقاطع</div><div class="chips">';
+      for(var v=a;v<=b;v++)h+='<button class="chip'+(done.has(v)?' on':'')+'" data-v="'+v+'">'+v+'</button>';
+      h+='</div></div>';
+    }
+    h+='</div>';
+  });
+  h+='<div class="foot">اضغط على رقم المقطع لتحديده كمُنجَز، أو على اسم الأسبوع لتحديد كل مقاطعه.<br><button id="rs">إعادة ضبط التقدم</button></div>';
+  document.getElementById("app").innerHTML=h;
+  var cw=0;for(var q=0;q<W;q++)if(num(weeks[q][0],weeks[q][1])===weeks[q][1]-weeks[q][0]+1)cw++;
+  var p=Math.round(done.size/T*100);
+  document.getElementById("s1").innerHTML=done.size+' / '+T+' <small>مقطع</small>';
+  document.getElementById("s2").innerHTML=cw+' / '+W+' <small>أسبوع</small>';
+  document.getElementById("s3").innerHTML=p+'%';
+  document.getElementById("pb").style.width=p+'%';
+}
+document.addEventListener("click",function(e){
+  var el=e.target.closest("button");if(!el)return;
+  if(el.dataset.v){var v=+el.dataset.v;done.has(v)?done.delete(v):done.add(v);}
+  else if(el.dataset.w){var w=weeks[+el.dataset.w],all=num(w[0],w[1])===w[1]-w[0]+1;for(var x=w[0];x<=w[1];x++)all?done.delete(x):done.add(x);}
+  else if(el.id==="rs"){if(confirm("هل تريد مسح كل التقدم؟"))done.clear();else return;}
+  else return;
+  var sy=window.scrollY;render();window.scrollTo(0,sy);save();
+});
+loadLocal();render();
+
+(async function(){
+  try{
+    if(!window.claude||!claude.use)return;
+    var db=await claude.use("db"),user=await claude.use("user");
+    if(!db||!user)return;
+    var id=await user.id();if(!id)return;
+    docRef=db.collection("data/users/"+id).doc("progress");
+    var snap=await docRef.get();
+    if(snap.exists){var d=snap.data();if(d&&Array.isArray(d.done)){d.done.forEach(function(x){done.add(x)});saveLocal();render();}}
+    else if(done.size){docRef.set({done:Array.from(done)}).catch(function(){});}
+  }catch(e){}
+})();
+})();
+</script>
+<script>
+(function(){
+var b=document.getElementById('ytBtn');if(!b)return;
+var id='PLIHsFGtup5z9j6FtmaEUW_W1KCfP_LLkZ';
+var web='https://www.youtube.com/playlist?list='+id;
+b.addEventListener('click',function(e){
+var ua=navigator.userAgent||'';
+if(/Android/i.test(ua)){
+e.preventDefault();
+location.href='intent://www.youtube.com/playlist?list='+id+'#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url='+encodeURIComponent(web)+';end';
+}else if(/iPhone|iPad|iPod/i.test(ua)){
+e.preventDefault();
+var t=setTimeout(function(){location.href=web;},1200);
+document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(t);});
+location.href='youtube://www.youtube.com/playlist?list='+id;
+}
+});
+})();
+</script>
+</body>
+</html>
